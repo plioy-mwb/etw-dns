@@ -152,12 +152,14 @@
     <ClCompile Include="etwDnsTest.cpp" />
     <ClCompile Include="DnsSensor.cpp" />
     <ClCompile Include="Logger.cpp" />
+    <ClCompile Include="ProviderHandler.cpp" />
     <ClCompile Include="WinETWSensor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AgentSensor.h" />
     <ClInclude Include="DnsSensor.h" />
     <ClInclude Include="Logger.h" />
+    <ClInclude Include="ProviderHandler.h" />
     <ClInclude Include="WinETWSensor.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

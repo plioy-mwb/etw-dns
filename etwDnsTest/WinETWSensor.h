@@ -20,16 +20,17 @@
                                         _SessionProperties;
                     bool                _TraceOn;
         protected:
-                    virtual bool        init();
-                    virtual void        runSensor();
-                    virtual void        stopSensor();
-                    virtual void        eventReceived(PEVENT_RECORD evt) = 0;
-                    BOOL                getPropertyValue(PEVENT_RECORD evt, LPWSTR prop, PBYTE *pData);
+                    virtual bool        init                                ();
+                    virtual void        runSensor                           ();
+                    virtual void        stopSensor                          ();
+                    virtual void        eventReceived                       (PEVENT_RECORD evt) = 0;
+                    virtual wstring     getProcessName                      (ULONG pid);
+                    BOOL                getPropertyValue                    (PEVENT_RECORD evt, LPWSTR prop, PBYTE *pData);
         public:
-                                        WinETWSensor(LPWSTR name, GUID guid);
-                    virtual            ~WinETWSensor();
+                                        WinETWSensor                        (LPWSTR name, GUID guid);
+                    virtual            ~WinETWSensor                        ();
                     static 
-                    VOID WINAPI         ProcessEvent(PEVENT_RECORD pEvent);
-                    DWORD               GetEventInformation(PEVENT_RECORD pEvent, PTRACE_EVENT_INFO& pInfo);
+                    VOID WINAPI         ProcessEvent                        (PEVENT_RECORD pEvent);
+                    DWORD               GetEventInformation                 (PEVENT_RECORD pEvent, PTRACE_EVENT_INFO& pInfo);
     };
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------

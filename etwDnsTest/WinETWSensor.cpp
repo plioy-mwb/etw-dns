@@ -1,5 +1,6 @@
 #include        "WinETWSensor.h"
 #include        <evntcons.h>
+#include        <Psapi.h>
 
 #pragma comment(lib, "tdh.lib")
 
@@ -62,7 +63,7 @@
         _SessionProperties->Wnode.ClientContext                 = 1;                                //QPC clock resolution
         _SessionProperties->Wnode.Guid                          = WINT_ETW_SESSION_GUID;
         _SessionProperties->LogFileMode                         = EVENT_TRACE_REAL_TIME_MODE;
-        _SessionProperties->MaximumFileSize                     = 1;                                // 1 MB
+        _SessionProperties->MaximumFileSize                     = 8;                               // in MB
         _SessionProperties->LoggerNameOffset                    = sizeof(EVENT_TRACE_PROPERTIES);
 
         // Create the trace session.
@@ -93,8 +94,8 @@
             NULL,
             _SessionTraceHandle,
             EVENT_CONTROL_CODE_ENABLE_PROVIDER,
-            TRACE_LEVEL_INFORMATION,
-            0xFFFFFFFFFFFFFFFF,
+            TRACE_LEVEL_VERBOSE,
+            0xFFFFFFFFFFFFFFFF, // all keywords !
             0,
             0,
             NULL
@@ -298,6 +299,10 @@
             _logger->log(ERR, "Error %d when trying to get property size.", status);
             return FALSE;
         }
+        
+        _logger->log(DBG, "array index: %ul", DataDescriptors.ArrayIndex);
+        _logger->log(DBG, "property size: %d", PropertySize);
+        _logger->log(DBG, "descriptors count: %d", DescriptorsCount);
 
         *pData = (PBYTE)malloc(PropertySize);
 
@@ -350,5 +355,23 @@
     cleanup:
 
         return status;
+    }
+//  ----------------------------------- ----------------------------------- ----------------------------------------------------------------
+    wstring
+    WinETWSensor::                      getProcessName                      (ULONG pid) {
+        HANDLE h = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, pid);
+        if (h) {
+            TCHAR Buffer[MAX_PATH];
+            GetModuleFileNameEx(h, 0, Buffer, MAX_PATH);
+            CloseHandle(h);
+            std::wstring name;
+            wchar_t* moduleNameOnly = wcsrchr(Buffer, L'\\') + 1;
+            name.assign(moduleNameOnly);
+            return name;
+        }
+        else {
+            // _SystemLogger->log(ERR, "Couldn't get process information for PID: %ld. Error: %d", pid, GetLastError());
+        }
+        return L"[PID: " + std::to_wstring(pid) + L"]";
     }
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------

@@ -1,10 +1,13 @@
-#pragma once
-#include "WinETWSensor.h"
-#include <map>
-#include <mutex>
+#pragma         once
+#include        "WinETWSensor.h"
+#include        <map>
+#include        <mutex>
+
+using namespace std;
+
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------
     typedef 
-    std::map<std::wstring, UINT64>      WStringCounterMap;
+    map<wstring, UINT64>                WStringCounterMap;
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------
     struct                              DnsStats                            {
         WStringCounterMap               DomainCounter;
@@ -14,15 +17,13 @@
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------
     class                               DnsSensor                           : public WinETWSensor {
         public:
-                    DnsSensor();
-                    virtual ~DnsSensor() = default;
-                    virtual std::wstring getInfo();
+                                        DnsSensor                           ();
+                    virtual            ~DnsSensor                           () = default;
+                    virtual wstring     getInfo                             ();
         private:
-                    DnsStats _Stats;
-                    std::mutex _Lock;
+                    DnsStats            _Stats;
+                    mutex               _Lock;
         protected:
-                    virtual void eventReceived(PEVENT_RECORD evt);
-        private:
-                    std::wstring getProcessName(ULONG pid);
+                    void                eventReceived                       (PEVENT_RECORD evt) override;
     };
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------

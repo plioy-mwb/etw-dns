@@ -3,7 +3,6 @@
 #include        <cstdarg>
 #include        <time.h>
 
-using namespace std;
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------
 void
     ConsoleLoggerChannel::              log                                 (const char* fmt, ...) {

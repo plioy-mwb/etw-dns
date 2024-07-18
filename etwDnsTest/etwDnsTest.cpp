@@ -2,13 +2,17 @@
 
 #include        <signal.h>
 #include        "DnsSensor.h"
+#include        "ProviderHandler.h"
 #include        "Logger.h"
 
 #include        <conio.h>
 
 bool            running     =   true;
 Logger          dbg;
-DnsSensor       sensor;
+//DnsSensor       sensor;
+
+//{ 0x1C95126E, 0x7EEA, 0x49A9, { 0xA3, 0xFE, 0xA3, 0x78, 0xB0, 0x3D, 0xDB, 0x4D } }
+ProviderHandler sensor((LPWSTR)L"Fake Provider Name", { 0xA0C1853B, 0x5C40, 0x4B15, { 0x87, 0x66, 0x3C, 0xF1, 0xC5, 0x8F, 0x98, 0x5A }});
 HANDLE          hEvent;
 
 //  ----------------------------------- ----------------------------------- ----------------------------------------------------------------
