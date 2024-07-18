@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/etwDnsTest/.vs
+/etwDnsTest/etwDnsTest/x64
+/etwDnsTest/Release
+/etwDnsTest/x64/Debug
+/etwDnsTest/x64/Release

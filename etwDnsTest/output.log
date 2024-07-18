@@ -1,0 +1,15 @@
+[INFO][2024-04-24.12:14:05] - Starting Application
+[INFO][2024-04-24.12:14:05] - Starting Microsoft-Windows-DNS-Client sensor
+[INFO][2024-04-24.12:14:05] - Event trace session succesfully started
+[INFO][2024-04-24.12:14:05] - Event provider succesfully enabled in event trace session.
+[INFO][2024-04-24.12:14:05] - Sensor Microsoft-Windows-DNS-Client started.
+DNS Sensor Info
+{
+	Total Queries Received: 0
+	Total Process Generating Queries: 0
+	TOP Most Queried Domains:
+	TOP Most Active Process:
+}
+[INFO][2024-04-24.12:14:15] - Signal received. Terminating process
+[INFO][2024-04-24.12:14:15] - Stopping Microsoft-Windows-DNS-Client sensor
+[INFO][2024-04-24.12:14:15] - Sensor Microsoft-Windows-DNS-Client stopped
